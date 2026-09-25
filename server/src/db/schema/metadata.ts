@@ -6,6 +6,7 @@ import {
   date,
   index,
   integer,
+  smallint,
   jsonb,
   pgTable,
   primaryKey,
@@ -53,6 +54,7 @@ export const bookMetadata = pgTable(
     seriesName: varchar('series_name', { length: 500 }),
     seriesIndex: varchar('series_index', { length: 20 }),
     rating: integer('rating'),
+    ageRating: smallint('age_rating'), // Возростные ограничения книги
     coverSource: varchar('cover_source', { length: 9 }),
     googleBooksId: varchar('google_books_id', { length: 50 }),
     goodreadsId: varchar('goodreads_id', { length: 50 }),

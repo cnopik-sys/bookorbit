@@ -2,6 +2,7 @@ import { sql } from 'drizzle-orm';
 import {
   boolean,
   check,
+  date,
   index,
   integer,
   jsonb,
@@ -28,6 +29,7 @@ export const users = pgTable(
     username: varchar('username', { length: 100 }).notNull().unique(),
     name: varchar('name', { length: 255 }).notNull(),
     email: varchar('email', { length: 255 }).unique(),
+    birthDate: date('birth_date', { mode: 'string' }), // День рождения для фильтрации по возросту
     passwordHash: varchar('password_hash', { length: 255 }).notNull(),
     active: boolean('active').notNull().default(true),
     isSuperuser: boolean('is_superuser').notNull().default(false),
