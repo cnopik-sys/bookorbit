@@ -201,8 +201,8 @@ export function useMetadataEditor() {
     form.isbn10 = book.isbn10
     form.isbn13 = book.isbn13
     form.rating = book.rating ?? null
-    ;((form.ageRating = book.ageRating ?? null), //Возростные ограничения
-      (form.authors = book.authors.map((a) => a.name)))
+    form.ageRating = book.ageRating ?? null //Возростные ограничения
+    form.authors = book.authors.map((a) => a.name)
     form.genres = [...book.genres]
     form.tags = [...book.tags]
     form.narrators = book.audioMetadata?.narrators?.map((n) => n.name) ?? []
