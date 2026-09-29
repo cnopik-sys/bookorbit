@@ -150,6 +150,7 @@ export type BookCard = {
   language: string | null;
   genres: string[];
   rating: number | null;
+  ageRating: number | null;	//Возростные ограничения
   readingProgress: number | null;
   readStatus: UserBookStatus | null;
   addedAt: string;
@@ -175,7 +176,7 @@ export type BookDetailFile = {
   format: string | null;
   role: string;
   sizeBytes: number | null;
-  absolutePath: string;
+  absolutePath: string	;
   createdAt: string;
   filename: string | null;
   durationSeconds: number | null;
@@ -246,6 +247,7 @@ export type BookDetail = {
   seriesIndex: SeriesIndex | null;
   seriesMemberships?: BookSeriesMembership[];
   rating: number | null;
+  ageRating: number | null;		//Возростные ограничения
   personalNote: string | null;
   personalNoteUpdatedAt: string | null;
   communityRatings: BookCommunityRating[];

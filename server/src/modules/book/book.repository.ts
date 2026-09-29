@@ -84,6 +84,7 @@ type CollapsedRawRow = {
   published_year: number | null;
   language: string | null;
   rating: number | null;
+  age_rating: number | null; //Возростные ограничения
   metadata_score: number | null;
   cover_source: string | null;
   locked_fields: string[] | null;
@@ -565,6 +566,7 @@ export class BookRepository {
         publishedYear: bookMetadata.publishedYear,
         language: bookMetadata.language,
         rating: userBookRatings.rating,
+        ageRating: bookMetadata.ageRating, //Возростные ограничения
         coverSource: bookMetadata.coverSource,
         lockedFields: bookMetadata.lockedFields,
         subtitle: bookMetadata.subtitle,
@@ -809,6 +811,7 @@ export class BookRepository {
       publishedYear: number | null;
       language: string | null;
       rating: number | null;
+      ageRating: number | null; //Возростные ограничения
       metadataScore: number | null;
       coverSource: string | null;
       lockedFields: string[] | null;
@@ -898,6 +901,7 @@ export class BookRepository {
           book_metadata.published_date,
           book_metadata.published_year,
           book_metadata.language,
+		  book_metadata.age_rating,
           book_metadata.cover_source,
           book_metadata.locked_fields,
           book_metadata.publisher,
@@ -1038,6 +1042,7 @@ export class BookRepository {
           base.published_year,
           base.language,
           ubr.rating,
+		  base.age_rating,
           base.cover_source,
           base.locked_fields,
           base.publisher,
@@ -1118,6 +1123,7 @@ export class BookRepository {
       publishedYear: r.published_year,
       language: r.language,
       rating: r.rating,
+      ageRating: r.age_rating, // Возростные ограничения
       metadataScore: r.metadata_score !== null ? Number(r.metadata_score) : null,
       coverSource: r.cover_source,
       lockedFields: r.locked_fields,

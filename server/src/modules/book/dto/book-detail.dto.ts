@@ -55,6 +55,7 @@ export class BookDetailDto {
   seriesIndex: string | null;
   seriesMemberships: BookSeriesMembership[];
   rating: number | null;
+  ageRating: number | null; //Возростные ограничения
   personalNote: string | null;
   personalNoteUpdatedAt: Date | null;
   communityRatings: BookCommunityRating[];

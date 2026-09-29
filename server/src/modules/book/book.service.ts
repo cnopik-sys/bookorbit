@@ -1807,6 +1807,7 @@ export class BookService {
     if (dto.lubimyczytacId !== undefined) scalarFields.lubimyczytacId = dto.lubimyczytacId ?? null;
     if (dto.aladinId !== undefined) scalarFields.aladinId = dto.aladinId ?? null;
     if (dto.rating !== undefined) scalarFields.rating = dto.rating ?? null;
+    if (dto.ageRating !== undefined) scalarFields.ageRating = dto.ageRating ?? null; // Возростные ограничения
     if (dto.audioMetadata) {
       if (dto.audioMetadata.durationSeconds !== undefined) scalarFields.durationSeconds = dto.audioMetadata.durationSeconds ?? null;
       if (dto.audioMetadata.abridged !== undefined) scalarFields.abridged = dto.audioMetadata.abridged ?? false;
@@ -3262,6 +3263,7 @@ export class BookService {
       seriesIndex: meta?.seriesIndex ?? null,
       seriesMemberships: seriesMembershipRows,
       rating: personalRating,
+      ageRating: meta?.ageRating ?? null, //Возростные ограничения
       personalNote: personalNote?.note ?? null,
       personalNoteUpdatedAt: personalNote ? new Date(personalNote.updatedAt) : null,
       communityRatings: this.mapCommunityRatingRows(communityRatingRows),

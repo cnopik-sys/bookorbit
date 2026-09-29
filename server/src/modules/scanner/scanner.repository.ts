@@ -599,6 +599,7 @@ export class ScannerRepository {
           publishedYear: bookMetadata.publishedYear,
           language: bookMetadata.language,
           rating: bookMetadata.rating,
+          ageRating: bookMetadata.ageRating, //Возростные ограничения
           coverSource: bookMetadata.coverSource,
           lockedFields: bookMetadata.lockedFields,
           subtitle: bookMetadata.subtitle,

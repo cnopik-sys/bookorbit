@@ -27,6 +27,7 @@ type BookRow = {
   publishedYear: number | null;
   language: string | null;
   rating: number | null;
+  ageRating: number | null; //Возростные ограничения
   metadataScore?: number | null;
   coverSource: string | null;
   lockedFields: string[] | null;
@@ -233,6 +234,7 @@ export function assembleBookCards(
       language: row.language ?? null,
       genres: genresByBook.get(row.id) ?? [],
       rating: row.rating ?? null,
+      ageRating: row.ageRating ?? null, //Возростные ограничения
       readingProgress,
       readStatus: statusByBookId.get(row.id) ?? null,
       addedAt: row.addedAt.toISOString(),
