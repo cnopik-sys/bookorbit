@@ -5280,6 +5280,7 @@
         "publisher": "Publisher",
         "published": "Published",
         "language": "Language",
+        "ageRating": "Age rating",
         "pages": "Pages",
         "duration": "Duration",
         "edition": "Edition",
