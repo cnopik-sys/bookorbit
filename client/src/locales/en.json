@@ -5406,6 +5406,7 @@
         "genresLabel": "Genres",
         "tagsLabel": "Tags",
         "ratingLabel": "Rating",
+        "ageRatingLabel": "Age rating",
         "rateStar": "Rate {star}",
         "clear": "Clear",
         "communityRatingsLabel": "Community Ratings",

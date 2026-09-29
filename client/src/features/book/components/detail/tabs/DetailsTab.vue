@@ -2115,6 +2115,12 @@ watch(
             <dt class="shrink-0 text-[11px] font-medium text-muted-foreground">{{ t('book.detail.details.library') }}</dt>
             <dd class="truncate text-[13px] font-medium">{{ book.libraryName || '-' }}</dd>
           </div>
+
+          <div class="flex items-baseline justify-between gap-3 border-b border-border py-[6px] last:border-b-0">
+            <dt class="shrink-0 text-[11px] font-medium text-muted-foreground">{{ t('book.detail.details.ageRating') }}</dt>
+            <dd class="truncate text-[13px] font-medium capitalize">{{ book.ageRating != null ? `${book.ageRating}+` : '-' }}</dd>
+          </div>
+
           <div class="flex items-baseline justify-between gap-3 border-b border-border py-[6px] last:border-b-0">
             <dt class="shrink-0 text-[11px] font-medium text-muted-foreground">{{ t('book.detail.details.added') }}</dt>
             <template v-if="editingAddedDate">

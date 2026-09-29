@@ -30,6 +30,7 @@ const ROOT_FIELDS = [
   'isbn10',
   'isbn13',
   'rating',
+  'ageRating', //Возростные ограничения
   'authors',
   'genres',
   'tags',
@@ -143,6 +144,7 @@ export function useMetadataEditor() {
     isbn10: null as string | null,
     isbn13: null as string | null,
     rating: null as number | null,
+    ageRating: null as number | null, //Возростные ограничения
     authors: [] as string[],
     genres: [] as string[],
     tags: [] as string[],
@@ -199,7 +201,8 @@ export function useMetadataEditor() {
     form.isbn10 = book.isbn10
     form.isbn13 = book.isbn13
     form.rating = book.rating ?? null
-    form.authors = book.authors.map((a) => a.name)
+    ;((form.ageRating = book.ageRating ?? null), //Возростные ограничения
+      (form.authors = book.authors.map((a) => a.name)))
     form.genres = [...book.genres]
     form.tags = [...book.tags]
     form.narrators = book.audioMetadata?.narrators?.map((n) => n.name) ?? []

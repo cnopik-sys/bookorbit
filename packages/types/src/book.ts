@@ -150,7 +150,7 @@ export type BookCard = {
   language: string | null;
   genres: string[];
   rating: number | null;
-  ageRating: number | null;	//Возростные ограничения
+  ageRating?: number | null;	//Возростные ограничения
   readingProgress: number | null;
   readStatus: UserBookStatus | null;
   addedAt: string;
@@ -247,7 +247,7 @@ export type BookDetail = {
   seriesIndex: SeriesIndex | null;
   seriesMemberships?: BookSeriesMembership[];
   rating: number | null;
-  ageRating: number | null;		//Возростные ограничения
+  ageRating?: number | null;		//Возростные ограничения
   personalNote: string | null;
   personalNoteUpdatedAt: string | null;
   communityRatings: BookCommunityRating[];

@@ -198,7 +198,7 @@ async function loadAvailableMetadataProviders(bookId: number) {
   }
 }
 
-function setIntField(field: 'publishedYear' | 'pageCount' | 'durationSeconds', e: Event) {
+function setIntField(field: 'publishedYear' | 'pageCount' | 'durationSeconds' | 'ageRating', e: Event) {
   const val = (e.target as HTMLInputElement).value
   if (val === '') {
     form[field] = null
@@ -1359,6 +1359,27 @@ function handleCoverChanged(source: 'extracted' | 'custom' | null) {
                     {{ t('book.detail.editMetadata.clear') }}
                   </button>
                 </div>
+              </MetadataFieldLabel>
+
+              <MetadataFieldLabel
+                class="col-span-2"
+                :label="t('book.detail.editMetadata.ageRatingLabel')"
+                field="ageRating"
+                :locked="isLocked('ageRating')"
+                :is-updating="isUpdatingLock"
+                @toggle="handleLockToggle"
+              >
+                <input
+                  :value="form.ageRating ?? ''"
+                  type="number"
+                  min="0"
+                  max="99"
+                  step="1"
+                  placeholder="—"
+                  :class="controlClass(form.ageRating == null)"
+                  :disabled="isLocked('ageRating') || formDisabled"
+                  @input="setIntField('ageRating', $event)"
+                />
               </MetadataFieldLabel>
 
               <div v-if="visibleProviderIdFields.length > 0" class="col-span-2 flex flex-col gap-1 border-t border-border pt-2.5">

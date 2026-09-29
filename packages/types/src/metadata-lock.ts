@@ -14,6 +14,7 @@ export const BOOK_METADATA_LOCK_FIELDS = [
   "genres",
   "tags",
   "rating",
+  "ageRating",
   "communityRating",
   "narrators",
   "durationSeconds",
