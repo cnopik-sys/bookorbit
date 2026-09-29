@@ -514,7 +514,10 @@
         "usernameHint": "Your username cannot be changed.",
         "passwordHint": "Change the password you use to sign in.",
         "passwordHintOidc": "Your password is managed by your identity provider.",
-        "passwordHintShared": "Shared accounts sign in through a magic link and have no password."
+        "passwordHintShared": "Shared accounts sign in through a magic link and have no password.",
+        "birthDate": "Date of birth",
+        "birthDateHint": "Used to determine which books are age-appropriate for you",
+        "birthDateFutureError": "Date of birth cannot be in the future"
       },
       "readingPreferences": {
         "title": "Reading Preferences",

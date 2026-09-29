@@ -34,6 +34,7 @@ const profileError = ref<string | null>(null)
 const removeAvatarConfirmOpen = ref(false)
 const formName = ref('')
 const formTimezone = ref('UTC')
+const formBirthDate = ref('')
 const savedTimezone = computed(() => (user.value?.settings as UserSettings | undefined)?.timezone ?? 'UTC')
 const timezoneChanged = computed(() => formTimezone.value !== savedTimezone.value)
 const savingAchievements = ref(false)
@@ -51,6 +52,7 @@ watch(
   () => user.value,
   (current) => {
     formName.value = current?.name ?? ''
+    formBirthDate.value = current?.birthDate ?? ''
     formTimezone.value = (current?.settings as UserSettings | undefined)?.timezone ?? 'UTC'
   },
   { immediate: true },
@@ -64,7 +66,8 @@ const nameChanged = computed(() => {
   if (!current) return false
   return formName.value.trim() !== current.name
 })
-const profileChanged = computed(() => nameChanged.value || timezoneChanged.value)
+const birthDateChanged = computed(() => (formBirthDate.value || null) !== (user.value?.birthDate || null))
+const profileChanged = computed(() => nameChanged.value || birthDateChanged.value || timezoneChanged.value)
 const accountEditBlocked = computed(() => isDemoRestrictedAccount.value)
 const canChangePassword = computed(
   () =>
@@ -159,13 +162,26 @@ async function saveProfile() {
     return
   }
 
+  // Validate birth date: format YYYY-MM-DD, not in the future
+  const todayKey = new Date().toISOString().slice(0, 10)
+  if (formBirthDate.value && formBirthDate.value > todayKey) {
+    const message = t('settings.account.profile.birthDateFutureError')
+    profileError.value = message
+    toast.error(message)
+    return
+  }
+
   savingProfile.value = true
   try {
-    if (nameChanged.value) {
+    if (nameChanged.value || birthDateChanged.value) {
+      const body: Record<string, unknown> = {}
+      if (nameChanged.value) body.name = trimmedName
+      if (birthDateChanged.value) body.birthDate = formBirthDate.value || null
+
       const res = await api('/api/v1/users/me', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: trimmedName }),
+        body: JSON.stringify(body),
       })
       if (!res.ok) {
         const payload = (await res.json().catch(() => null)) as { message?: string | string[] } | null
@@ -200,6 +216,7 @@ async function saveProfile() {
 
 function discardProfileChanges() {
   formName.value = user.value?.name ?? ''
+  formBirthDate.value = user.value?.birthDate ?? ''
   formTimezone.value = savedTimezone.value
   profileError.value = null
 }
@@ -447,6 +464,19 @@ function closeUnlinkDialog() {
                 class="input-field w-full truncate bg-muted/50 text-muted-foreground"
               />
               <p class="settings-hint">{{ t('settings.account.profile.emailHint') }}</p>
+            </div>
+            <div class="space-y-1.5 sm:col-span-2">
+              <label for="account-birth-date" class="settings-label">{{ t('settings.account.profile.birthDate') }}</label>
+              <input
+                id="account-birth-date"
+                v-model="formBirthDate"
+                type="date"
+                :max="new Date().toISOString().slice(0, 10)"
+                :readonly="accountEditBlocked"
+                class="input-field w-full sm:max-w-xs"
+                :class="accountEditBlocked ? 'cursor-not-allowed bg-muted/50 text-muted-foreground' : ''"
+              />
+              <p class="settings-hint">{{ t('settings.account.profile.birthDateHint') }}</p>
             </div>
           </div>
         </div>
