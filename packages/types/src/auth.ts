@@ -54,6 +54,7 @@ export interface AuthUser {
   username: string;
   name: string;
   email?: string;
+  birthDate: string | null; // ДР
   active: boolean;
   isSuperuser: boolean;
   isDefaultPassword: boolean;

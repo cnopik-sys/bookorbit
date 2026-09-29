@@ -322,6 +322,7 @@ export class AuthService {
       username: user.username,
       name: user.name,
       email: user.email,
+      birthDate: user.birthDate, //ДР
       active: user.active,
       isSuperuser: user.isSuperuser,
       isDefaultPassword: user.isDefaultPassword,

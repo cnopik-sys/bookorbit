@@ -104,6 +104,7 @@ export class UserRepository {
         username: schema.users.username,
         name: schema.users.name,
         email: schema.users.email,
+        birthDate: schema.users.birthDate, //ДР
         active: schema.users.active,
         isSuperuser: schema.users.isSuperuser,
         isDefaultPassword: schema.users.isDefaultPassword,
@@ -125,6 +126,7 @@ export class UserRepository {
       username: string;
       name: string;
       email: string | null;
+      birthDate: string | null; //ДР
       active: boolean;
       isSuperuser: boolean;
       isDefaultPassword: boolean;
@@ -147,6 +149,7 @@ export class UserRepository {
           username: row.username,
           name: row.name,
           email: row.email,
+          birthDate: row.birthDate, //ДР
           active: row.active,
           isSuperuser: row.isSuperuser,
           isDefaultPassword: row.isDefaultPassword,
@@ -312,6 +315,7 @@ export class UserRepository {
           username: schema.users.username,
           name: schema.users.name,
           email: schema.users.email,
+          birthDate: schema.users.birthDate, //ДР
           active: schema.users.active,
           isSuperuser: schema.users.isSuperuser,
           isDefaultPassword: schema.users.isDefaultPassword,
@@ -353,6 +357,7 @@ export class UserRepository {
       username: first.username,
       name: first.name,
       email: first.email,
+      birthDate: first.birthDate, //ДР
       active: first.active,
       isSuperuser: first.isSuperuser,
       isDefaultPassword: first.isDefaultPassword,
@@ -383,7 +388,10 @@ export class UserRepository {
     return user;
   }
 
-  async update(id: number, data: Partial<Pick<typeof schema.users.$inferInsert, 'name' | 'email' | 'active' | 'settings' | 'seeOwnRequestedBooks'>>) {
+  async update(
+    id: number,
+    data: Partial<Pick<typeof schema.users.$inferInsert, 'name' | 'email' | 'birthDate' | 'active' | 'settings' | 'seeOwnRequestedBooks'>>,
+  ) {
     const { settings, ...rest } = data;
     const setData: Record<string, unknown> = { ...rest, updatedAt: new Date() };
     if (settings !== undefined) {
@@ -394,6 +402,7 @@ export class UserRepository {
       username: schema.users.username,
       name: schema.users.name,
       email: schema.users.email,
+      birthDate: schema.users.birthDate, //ДР
       active: schema.users.active,
       isDefaultPassword: schema.users.isDefaultPassword,
       settings: schema.users.settings,
@@ -406,7 +415,7 @@ export class UserRepository {
   async updateManagedUser(
     requestingUserId: number,
     targetUserId: number,
-    data: Partial<Pick<typeof schema.users.$inferInsert, 'name' | 'email' | 'active'>>,
+    data: Partial<Pick<typeof schema.users.$inferInsert, 'name' | 'email' | 'birthDate' | 'active'>>,
   ): Promise<{ status: ManagedUserMutationStatus; user?: Awaited<ReturnType<UserRepository['update']>> }> {
     return this.db.transaction(async (tx) => {
       await this.authenticationPolicy.lockAdministratorAvailability(tx);
@@ -426,6 +435,7 @@ export class UserRepository {
           username: schema.users.username,
           name: schema.users.name,
           email: schema.users.email,
+          birthDate: schema.users.birthDate, //ДР
           active: schema.users.active,
           isDefaultPassword: schema.users.isDefaultPassword,
           settings: schema.users.settings,

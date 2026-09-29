@@ -17,6 +17,7 @@ export function makeRequestUser(overrides?: Partial<RequestUser>): RequestUser {
     permissions: [],
     ...overrides,
     contentFilters: EMPTY_CONTENT_FILTER_RULES,
+    birthDate: overrides?.birthDate ?? null,
   };
 }
 

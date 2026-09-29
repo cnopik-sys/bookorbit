@@ -7,6 +7,7 @@ export interface RequestUser {
   username: string;
   name: string;
   email: string | null;
+  birthDate: string | null; //ДР
   active: boolean;
   isSuperuser: boolean;
   isDefaultPassword: boolean;
